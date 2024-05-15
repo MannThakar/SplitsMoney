@@ -13,12 +13,6 @@ function UpdateModal({ onClose, setGroup }) {
     const [groupName, setGroupName] = useState('');
     const [groupDescr, setGroupDescription] = useState('');
     const { id } = useParams();
-    const [res, setRes] = useState([])
-
-
-    console.log(groupName, groupDescr)
-
-
 
     async function viewGroup() {
         try {
@@ -28,13 +22,8 @@ function UpdateModal({ onClose, setGroup }) {
                     Authorization: `Bearer ${localStorage.getItem("Token")}`,
                 },
             });
-            console.log(response.data);
             setGroupName(response.data.name)
             setGroupDescription(response.data.description)
-
-
-
-
         } catch (error) {
             console.error("Error:", error);
         }
@@ -58,36 +47,15 @@ function UpdateModal({ onClose, setGroup }) {
                         Authorization: `Bearer ${localStorage.getItem('Token')}`
                     }
                 }
+             
             );
             onClose(false);
-            console.log(response);
 
-            if (response.status === 200) {
+            if (response.status == 200) {
                 setGroup(groupName)
-                console.log("inside if")
-                toast.success('Invitation sent successfully', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-
-                });
-
+                toast.success('Invitation sent successfully')
             } else {
-                toast.error('Error while sending invitation', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                });
+                toast.error('Error while sending invitation')
             }
 
         } catch (error) {
@@ -103,16 +71,21 @@ function UpdateModal({ onClose, setGroup }) {
 
     return (
         <div ref={modalRef} onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm ">
-            <Toaster position='top-center ' toastOptions={{
-                duration: 3000,
-                style: {
-                    background: '#363636',
-                    color: '#fff',
-                },
-            }} />
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    duration: 3000,
+                    style: {
+                        background: "#363636",
+                        color: "#fff",
+                    },
+                }}
+            />
+
+
             <div className='flex flex-col w-11/12 h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
                 <div className='flex justify-end pt-3 pr-3 w-full'>
-                    <button onClick={onClose} className=''>
+                    <button onClick={onClose}>
                         <X />
                     </button>
                 </div>
@@ -121,8 +94,6 @@ function UpdateModal({ onClose, setGroup }) {
                         <h1 className='font-poppins text-base'>Update group details</h1>
 
                     </div>
-                    {/* onSubmit={groupInvite} */}
-
                     <div className='flex justify-center'>
                         <form onSubmit={groupUpdate} className='pt-2 flex flex-col leading-4 gap-4'>
                             <input type="text" placeholder='Enter group name' className='p-2' value={groupName} required onChange={(e) => setGroupName(e.target.value)} />
