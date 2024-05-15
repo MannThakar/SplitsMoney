@@ -16,7 +16,7 @@ import GroupInfo from "./component/HeroSection/groupinfo";
 import AddExpense from "./component/HeroSection/addexpense";
 import Settings from "./component/HeroSection/settings";
 function App() {
-  return (
+   return (
     <>
       <Routes>
         <Route>
