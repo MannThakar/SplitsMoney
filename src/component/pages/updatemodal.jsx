@@ -48,7 +48,7 @@ function UpdateModal({ onClose, setGroup }) {
                     }
                 }
 
-             
+
             );
             onClose(false);
 
@@ -109,7 +109,6 @@ function UpdateModal({ onClose, setGroup }) {
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
