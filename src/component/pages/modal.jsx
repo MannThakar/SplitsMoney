@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-function Modal({ onClose }) {
+function Modal({ onClose, ids }) {
     const modalRef = useRef();
     const [email, setEmail] = useState('');
 
@@ -12,7 +12,7 @@ function Modal({ onClose }) {
         try {
             const response = await axios.post(
                 `http://35.154.22.58/api/v1/invite-group-member`,
-                { email, group_id: 14 }, // Assuming group_id is a constant
+                { email, group_id: ids }, // Assuming group_id is a constant
                 {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',

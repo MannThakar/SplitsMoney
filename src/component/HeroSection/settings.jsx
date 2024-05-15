@@ -66,16 +66,6 @@ const Settings = ({ onClose }) => {
     console.log(group);
     return (
         <div>
-            <Toaster
-                position="top-center"
-                toastOptions={{
-                    duration: 5000,
-                    style: {
-                        background: "#363636",
-                        color: "#fff",
-                    },
-                }}
-            />
 
             <div className="flex w-full bottom-0 gap-3 px-3 pt-3 h-20 bg-BrandColor">
                 <button>

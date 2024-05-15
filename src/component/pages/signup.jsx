@@ -40,12 +40,10 @@ function SignUp() {
       console.error('Error:', error);
     }
     setSubmitting(false);
-    const numberInput = document.getElementById('phone_no');
-
 
   }
   return (
-    <div className="md:flex md:justify-center items-center h-screen">
+    <div className="w-full">
       <Toaster position='top-center' toastOptions={{
         duration: 7000,
         style: {
@@ -53,7 +51,7 @@ function SignUp() {
           color: '#fff',
         },
       }} />
-      <div className="max-w-md h-svh mx-2 p-9 rounded-2xl shadow-md bg-BrandColor">
+      <div className=" h-svh mx-2 p-9 rounded-2xl shadow-md bg-BrandColor">
         <h2 className="mb-4 text-3xl font-semibold text-center font-poppins">Sign Up</h2>
         <Formik
           initialValues={{ type: '', phone_no: '', name: '', email: '' }}
