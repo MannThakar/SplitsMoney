@@ -51,7 +51,7 @@ const SignIn = () => {
           color: '#fff',
         },
       }} />
-      <div className="bg-BrandColor h-svh rounded-2xl mx-auto max-w-md">
+      <div className="bg-BrandColor h-svh rounded-2xl mx-auto">
         <h1 className="font-poppins text-3xl pt-5 font-semibold text-center">Login</h1>
         <Formik
           initialValues={{ phone_no: '' }}
