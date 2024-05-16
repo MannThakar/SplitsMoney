@@ -54,8 +54,6 @@ const Settings = () => {
     // };
     return (
         <div>
-
-
             <div className="flex w-full bottom-0 gap-3 px-3 pt-3 h-20 bg-BrandColor">
                 <button>
                     <svg
@@ -105,8 +103,6 @@ const Settings = () => {
                             <h3 className="font-poppins text-lg">Add group members</h3>
                         </div>
                     </a>
-
-
                     <div>{modal && <Modal onClose={() => setModal(false)} />}</div>
                     {modals && <UpdateModal onClose={() => setModals(false)} ids={id} setGroup={setGroup} />}
                     <a className="flex space-x-5 items-center" onClick={(event) => handleDelete(event.id)}>

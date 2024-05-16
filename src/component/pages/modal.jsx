@@ -61,7 +61,7 @@ function Modal({ onClose, ids }) {
 
     return (
         <div ref={modalRef} onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm ">
-            <div className='flex flex-col w-11/12 h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
+            <div className='flex flex-col w-11/12 h-64 rounded-xl gap-3 mx-auto mt-12 bg-BrandColor items-center '>
                 <div className='flex justify-end pt-3 pr-3 w-full'>
                     <button onClick={onClose} className=''>
                         <X />
@@ -69,12 +69,14 @@ function Modal({ onClose, ids }) {
                 </div>
                 <div className='flex flex-col gap-5'>
                     <div>
-                        <h1>Invite other members too.</h1>
-                        <p>Invite the other members via mail.</p>
+                        <h1 className='font-poppins'>Invite other members too.</h1>
+                        <p className='font-poppins'>Invite the other members via mail.</p>
                     </div>
-                    <form onSubmit={groupInvite} className='pt-2'>
-                        <input type="email" placeholder='Enter the email' className='p-2' required onChange={(e) => setEmail(e.target.value)} />
-                        <button type="submit" className='p-2 text-white bg-black rounded-sm'>Invite</button>
+                    <form onSubmit={groupInvite} className='pt-2 flex flex-col justify-center gap-2'>
+                        <input type="email" placeholder='Enter the email' className='p-2 rounded-md font-poppins' required onChange={(e) => setEmail(e.target.value)} />
+                        <div className='flex justify-center'>
+                          <button type="submit" className='p-2 text-white w-24 hover:text-black hover:bg-sky-200  flex justify-center items-center font-poppins bg-black rounded-lg'>Invite</button>
+                        </div>
                     </form>
                 </div>
             </div>

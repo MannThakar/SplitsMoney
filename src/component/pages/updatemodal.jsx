@@ -83,7 +83,7 @@ function UpdateModal({ onClose, setGroup }) {
             />
 
 
-            <div className='flex flex-col w-11/12 h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
+            <div className='flex flex-col w-11/12 rounded-xl h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
                 <div className='flex justify-end pt-3 pr-3 w-full'>
                     <button onClick={onClose}>
                         <X />
@@ -96,10 +96,10 @@ function UpdateModal({ onClose, setGroup }) {
                     </div>
                     <div className='flex justify-center'>
                         <form onSubmit={groupUpdate} className='pt-2 flex flex-col leading-4 gap-4'>
-                            <input type="text" placeholder='Enter group name' className='p-2' value={groupName} required onChange={(e) => setGroupName(e.target.value)} />
-                            <input type="text" placeholder='Enter group description' className='p-2' value={groupDescr} required onChange={(e) => setGroupDescription(e.target.value)} />
+                            <input type="text" placeholder='Enter group name' className='p-2 rounded-md font-poppins' value={groupName} required onChange={(e) => setGroupName(e.target.value)} />
+                            <input type="text" placeholder='Enter group description' className='p-2 rounded-md font-poppins' value={groupDescr} required onChange={(e) => setGroupDescription(e.target.value)} />
                             <div className='flex justify-center'>
-                                <button type="submit" className='p-2 text-white bg-black rounded-sm'>Update</button>
+                                <button type="submit" className='p-2 text-white font-poppins rounded-lg w-24 hover:text-black hover:bg-sky-200 bg-black'>Update</button>
                             </div>
                         </form>
                     </div>
