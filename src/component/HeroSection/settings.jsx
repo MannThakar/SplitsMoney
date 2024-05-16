@@ -2,15 +2,12 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Group, X } from 'lucide-react';
-
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react'
 import Modal from "../pages/modal";
 import { toast, Toaster } from 'react-hot-toast';
 import axios from 'axios';
-
 import UpdateModal from "../pages/updatemodal";
-
 
 const Settings = ({ onClose }) => {
     const modalRef = useRef();
@@ -69,7 +66,6 @@ const Settings = ({ onClose }) => {
     console.log(group);
     return (
         <div>
-
             <div className="flex w-full bottom-0 gap-3 px-3 pt-3 h-20 bg-BrandColor">
                 <button>
                     <svg
@@ -123,8 +119,6 @@ const Settings = ({ onClose }) => {
                             <h3 className="font-poppins text-lg">Add group members</h3>
                         </div>
                     </a>
-
-
                     <div>{modal && <Modal onClose={() => setModal(false)} />}</div>
 
                     {modals && <UpdateModal onClose={() => setModals(false)} ids={id} setGroup={setGroup} />}

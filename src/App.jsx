@@ -23,7 +23,7 @@ function App() {
         <Route>
           <Route path="/otp" element={<Otp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="/*" element={<PageNotFound />} />
           <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
           <Route element={<PrivateRoute />}>
