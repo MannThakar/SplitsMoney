@@ -17,7 +17,7 @@ import AddExpense from "./component/HeroSection/addexpense";
 import Settings from "./component/HeroSection/settings";
 import GroupInvite from "./component/pages/groupinvite";
 function App() {
-  return (
+   return (
     <>
       <Routes>
         <Route>

@@ -48,6 +48,7 @@ function UpdateModal({ onClose, setGroup }) {
                     }
                 }
 
+
             );
             onClose(false);
 
@@ -56,6 +57,7 @@ function UpdateModal({ onClose, setGroup }) {
                 toast.success('Invitation sent successfully')
             } else {
                 toast.error('Error while sending invitation')
+
             }
 
         } catch (error) {
@@ -71,21 +73,24 @@ function UpdateModal({ onClose, setGroup }) {
 
     return (
         <div ref={modalRef} onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm ">
-            <Toaster
-                position="top-center"
-                toastOptions={{
-                    duration: 3000,
-                    style: {
-                        background: "#363636",
-                        color: "#fff",
-                    },
-                }}
-            />
+
 
 
             <div className='flex flex-col w-11/12 rounded-xl h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
                 <div className='flex justify-end pt-3 pr-3 w-full'>
                     <button onClick={onClose}>
+
+            <Toaster position='top-center' toastOptions={{
+                duration: 3000,
+                style: {
+                    background: '#363636',
+                    color: '#fff',
+                },
+            }} />
+            <div className='flex flex-col w-11/12 h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
+                <div className='flex justify-end pt-3 pr-3 w-full'>
+                    <button onClick={onClose} className=''>
+
                         <X />
                     </button>
                 </div>
@@ -94,6 +99,7 @@ function UpdateModal({ onClose, setGroup }) {
                         <h1 className='font-poppins text-base'>Update group details</h1>
 
                     </div>
+
                     <div className='flex justify-center'>
                         <form onSubmit={groupUpdate} className='pt-2 flex flex-col leading-4 gap-4'>
                             <input type="text" placeholder='Enter group name' className='p-2 rounded-md font-poppins' value={groupName} required onChange={(e) => setGroupName(e.target.value)} />

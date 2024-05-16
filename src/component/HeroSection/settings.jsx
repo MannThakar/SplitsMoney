@@ -1,19 +1,25 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+import { Group, X } from 'lucide-react';
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Modal from "../pages/modal";
 import { toast, Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import UpdateModal from "../pages/updatemodal";
 
-const Settings = () => {
+const Settings = ({ onClose }) => {
+    const modalRef = useRef();
     const [modal, setModal] = useState(false)
     const [modals, setModals] = useState(false)
+    const [update, setUpdate] = useState(false)
     const navigate = useNavigate();
-    const [res,] = useState([]);
     const { id } = useParams();
     const [group, setGroup] = useState(null);
+
+
+
 
     const getGroupApi = async () => {
         const res = await axios.get(`${import.meta.env.VITE_API}/groups/${id}`, {
@@ -27,6 +33,11 @@ const Settings = () => {
     useEffect(() => {
         getGroupApi();
     }, [id]);
+
+
+    const editGroup = () => {
+        setUpdate(true);
+    }
 
 
     //Delete Group
@@ -52,6 +63,7 @@ const Settings = () => {
     //         toast.error("You pressed cancel");
     //     }
     // };
+    console.log(group);
     return (
         <div>
             <div className="flex w-full bottom-0 gap-3 px-3 pt-3 h-20 bg-BrandColor">
@@ -76,7 +88,11 @@ const Settings = () => {
             <div className='flex my-3 items-center justify-around'>
                 <div className='h-16 w-16 bg-red-400 rounded-2xl'> </div>
                 <span className="font-poppins text-lg">{group}</span>
+
                 <a><svg xmlns="http://www.w3.org/2000/svg" onClick={() => setModals(true)} width="28" height="28" viewBox="0 0 24 24"><path fill="gray" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L17.625 2.175L21.8 6.45L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" /></svg></a>
+
+                <a><svg xmlns="http://www.w3.org/2000/svg" onClick={editGroup} width="28" height="28" viewBox="0 0 24 24"><path fill="gray" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L17.625 2.175L21.8 6.45L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" /></svg></a>
+
             </div>
             <hr />
 
@@ -104,7 +120,12 @@ const Settings = () => {
                         </div>
                     </a>
                     <div>{modal && <Modal onClose={() => setModal(false)} />}</div>
+
                     {modals && <UpdateModal onClose={() => setModals(false)} ids={id} setGroup={setGroup} />}
+
+                    <div>{update && <UpdateModal onClose={() => setUpdate(false)} setGroup={setGroup} />}</div>
+
+
                     <a className="flex space-x-5 items-center" onClick={(event) => handleDelete(event.id)}>
                         <div className='rounded-full h-10 w-10 p-2 bg-red-300 flex justify-center'>
                             <svg
