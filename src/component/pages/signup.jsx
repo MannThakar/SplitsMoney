@@ -71,7 +71,6 @@ function SignUp() {
       toast.error('Something went wrong');
       console.error('Error:', error);
     }
-
     setSubmitting(false);
   };
 
