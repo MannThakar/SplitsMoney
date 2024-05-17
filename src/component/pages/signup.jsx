@@ -42,7 +42,6 @@ function SignUp() {
     setSubmitting(false);
     const numberInput = document.getElementById('phone_no');
 
-
   }
   return (
     <div className="md:flex md:justify-center items-center h-screen">
