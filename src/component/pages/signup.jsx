@@ -42,7 +42,6 @@ const validate = async (values) => {
       return acc;
     }, {});
   }
-
   return {};
 };
 
@@ -52,7 +51,6 @@ function SignUp() {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const { name, email, phone_no } = values;
-
     try {
       const response = await axios.get(`${import.meta.env.VITE_API}/send-otp?phone_no=${phone_no}&type=${type}`, {
         headers: {
@@ -73,7 +71,6 @@ function SignUp() {
       toast.error('Something went wrong');
       console.error('Error:', error);
     }
-
     setSubmitting(false);
   };
 
