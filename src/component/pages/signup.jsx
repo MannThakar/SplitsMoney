@@ -51,7 +51,6 @@ function SignUp() {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const { name, email, phone_no } = values;
-
     try {
       const response = await axios.get(`${import.meta.env.VITE_API}/send-otp?phone_no=${phone_no}&type=${type}`, {
         headers: {
