@@ -31,6 +31,7 @@ function App() {
               <Route path=":id" element={<GroupInfo />} />
               <Route path=":id/settings" element={<Settings />} />
             </Route>
+              <Route path="/groupinfo/:id" element={<GroupInfo />} />
             <Route path="addexpense" element={<AddExpense />} />
             <Route path="/creategroup" element={<CreateGroup />} />
             <Route path="/group" element={<Groups />} />

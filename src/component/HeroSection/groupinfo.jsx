@@ -174,7 +174,8 @@ const GroupInfo = () => {
           </span>
         </button>
       </div>
-      {modals && <Modal onClose={() => setModals(false)} ids={id} />}
+
+      {modals && <Modal onClose={() => setModals(false)} ids= {id} />}
 
     </div>
   );
