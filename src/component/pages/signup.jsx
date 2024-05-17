@@ -42,7 +42,6 @@ const validate = async (values) => {
       return acc;
     }, {});
   }
-
   return {};
 };
 
