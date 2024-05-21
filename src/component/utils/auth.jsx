@@ -1,16 +1,16 @@
 
 /* eslint-disable react/prop-types */
-import { createContext, useContext } from "react"
+import { createContext, useContext} from "react"
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-
     const storeToken = (serverToken) => {
         return localStorage.setItem("Token", serverToken)
 
     }
-    return <AuthContext.Provider value={{ storeToken }}>
+    return <AuthContext.Provider value={{ storeToken}}>
         {children}
     </AuthContext.Provider>
+    
 }
 
 export const useAuth = () => {
