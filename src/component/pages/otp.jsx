@@ -15,7 +15,7 @@ function Otp() {
   const [loading, setLoading] = useState(false);
 
   async function resendotps() {
-    const type = 'login'
+    const type = "login"
     try {
       const response = await axios.get(`${import.meta.env.VITE_API}/send-otp?phone_no=${phone_no}&type=${type}`, {
         headers: {
@@ -61,13 +61,12 @@ function Otp() {
             'X-Requested-With': 'XMLHttpRequest'
           }
         });
-        console.log(response)
         if (response.status == 200) {
           let data = {
             token_data: response.data.token,
           }
           storeToken(data.token_data)
-          setTimeout(navigate('/home', { state: data }), 7000)
+          setTimeout(navigate('/home', { state: data }), 3000)
           // toast.success("Welcome")
         }
         else {
@@ -83,7 +82,7 @@ function Otp() {
             'X-Requested-With': 'XMLHttpRequest'
           }
         });
-
+        console.log(response)
         if (response.status === 200) {
           navigate('/home');
         } else {

@@ -15,20 +15,23 @@ import PrivateRoute from "./component/auth/privateroute";
 import GroupInfo from "./component/HeroSection/groupinfo";
 import AddExpense from "./component/HeroSection/addexpense";
 import Settings from "./component/HeroSection/settings";
+import GroupInvite from "./component/pages/groupinvite";
 function App() {
-  return (
+   return (
     <>
       <Routes>
         <Route>
           <Route path="/otp" element={<Otp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="/*" element={<PageNotFound />} />
+          <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
           <Route element={<PrivateRoute />}>
             <Route path="/groups">
               <Route path=":id" element={<GroupInfo />} />
-              <Route path=":id/settings" element={<Settings/>} />
+              <Route path=":id/settings" element={<Settings />} />
             </Route>
+              <Route path="/groupinfo/:id" element={<GroupInfo />} />
             <Route path="addexpense" element={<AddExpense />} />
             <Route path="/creategroup" element={<CreateGroup />} />
             <Route path="/group" element={<Groups />} />

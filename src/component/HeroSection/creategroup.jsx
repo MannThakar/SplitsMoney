@@ -34,7 +34,6 @@ const CreateGroup = () => {
                 }
                 setTimeout(() => navigate('/home'), 5000)
                 navigate('/home', { state: data });
-
             }
         } catch (error) {
             toast.error('Something went wrong');

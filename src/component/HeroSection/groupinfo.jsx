@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useNavigate, useLocation, useParams,Link } from "react-router-dom";
+import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import Modal from "../../component/pages/modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -174,7 +174,8 @@ const GroupInfo = () => {
           </span>
         </button>
       </div>
-      {modals && <Modal onClose={() => setModals(false)} />}
+
+      {modals && <Modal onClose={() => setModals(false)} ids= {id} />}
 
     </div>
   );
