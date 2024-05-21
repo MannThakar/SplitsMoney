@@ -19,29 +19,29 @@ import GroupInvite from "./component/pages/groupinvite";
 
 function App() {
   return (
-      <Routes>
-        <Route>
-          <Route path="/otp" element={<Otp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          {/* <Route path="*" element={<PageNotFound />} /> */}
-          <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
-          <Route element={<PrivateRoute />}>
-            <Route path="/groups">
-              <Route path=":id" element={<GroupInfo />} />
-              <Route path=":id/settings" element={<Settings />} />
-            </Route>
-            <Route path="/groupinfo/:id" element={<GroupInfo />} />
-            <Route path="/addexpense" element={<AddExpense />} />
-            <Route path="/groups/creategroup" element={<CreateGroup />} />
-            <Route path="/group" element={<Groups />} />
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/accounts" element={<Account />} />
-            <Route path="/friends" element={<Friends />} />
-            <Route path="/settings" element={<Settings />} />
+    <Routes>
+      <Route>
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        {/* <Route path="*" element={<PageNotFound />} /> */}
+        <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/groups">
+            <Route path=":id" element={<GroupInfo />} />
+            <Route path=":id/settings" element={<Settings />} />
           </Route>
+          <Route path="/groupinfo/:id" element={<GroupInfo />} />
+          <Route path="/addexpense" element={<AddExpense />} />
+          <Route path="/groups/creategroup" element={<CreateGroup />} />
+          <Route path="/group" element={<Groups />} />
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/accounts" element={<Account />} />
+          <Route path="/friends" element={<Friends />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
-      </Routes>
+      </Route>
+    </Routes>
   );
 }
 export default App;
