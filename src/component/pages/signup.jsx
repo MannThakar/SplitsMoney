@@ -7,7 +7,7 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { Smartphone, Mail, User } from 'lucide-react';
 
-// Define the Yup schema for validation
+// Define the Yup schema for validation 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
   .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces')
