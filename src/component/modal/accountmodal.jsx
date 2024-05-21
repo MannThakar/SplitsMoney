@@ -7,17 +7,18 @@ import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-function AccountModal({ onClose, setGroup }) {
+function AccountModal({ onClose, setGroup, isEdit, setIsEdit }) {
     const modalRef = useRef();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+
     const { id } = useParams();
 
     // Account Owner Information
     async function viewAccountStatus() {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API}/groups/${id}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API}/me`, {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest",
                     Authorization: `Bearer ${localStorage.getItem("Token")}`,
@@ -33,13 +34,13 @@ function AccountModal({ onClose, setGroup }) {
 
     useEffect(() => {
         viewAccountStatus();
-    }, [id]);
+    }, [isEdit]);
 
     async function accountUpdate(e) {
         e.preventDefault();
         try {
             const response = await axios.put(
-                `${import.meta.env.VITE_API}/groups/${id}`,
+                `${import.meta.env.VITE_API}/users/${id}`,
                 {
                     name: name,
                     email: email,
@@ -53,9 +54,9 @@ function AccountModal({ onClose, setGroup }) {
                 }
             );
             onClose(false);
-
             if (response.status === 200) {
-                setGroup(name);
+                setIsEdit(!isEdit);
+                onClose();
                 toast.success('Group updated successfully');
             } else {
                 toast.error('Error while updating group');
@@ -93,7 +94,7 @@ function AccountModal({ onClose, setGroup }) {
                 <form onSubmit={accountUpdate} className="space-y-4">
                     <div className="flex items-center gap-2">
                         <User className="text-white" />
-                        <input type="text" placeholder="Enter group name" pattern="[a-zA-Z]*" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={name} required onChange={(e) => setName(e.target.value)} />
+                        <input type="text" placeholder="Enter group name" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={name} required onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-2">
                         <Mail className="text-white" />

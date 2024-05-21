@@ -34,6 +34,7 @@ export default {
 				primaryColor: "#201a31",
 				buttonColor: "#0df5e3",
 				highlightColor: "#FFD700",
+				boxColor:'#857f95'
 			},
 		},
 

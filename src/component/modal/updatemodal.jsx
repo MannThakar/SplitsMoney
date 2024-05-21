@@ -36,32 +36,38 @@ function UpdateModal({ onClose, setGroup }) {
 
     async function groupUpdate(e) {
         e.preventDefault();
-        try {
-            const response = await axios.put(
-                `${import.meta.env.VITE_API}/groups/${id}`,
-                {
-                    name: groupName,
-                    description: groupDescr
-                },
-                {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        Authorization: `Bearer ${localStorage.getItem('Token')}`
+        const type = 'group_expenses'
+        if (type == 'group_expenses') {
+            try {
+                const response = await axios.put(
+                    `${import.meta.env.VITE_API}/groups/${id}`,
+                    {
+                        name: groupName,
+                        description: groupDescr,
+                        type: type
+                    },
+                    {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            Authorization: `Bearer ${localStorage.getItem('Token')}`
+                        }
                     }
+                );
+                onClose(false);
+                if (response.status === 200) {
+                    setGroup(groupName);
+                    toast.success('Group updated successfully');
+                } else {
+                    toast.error('Error while updating group');
                 }
-            );
-            onClose(false);
-
-            if (response.status === 200) {
-                setGroup(groupName);
-                toast.success('Group updated successfully');
-            } else {
-                toast.error('Error while updating group');
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
         }
     }
+
+
+
 
     function closeModal(e) {
         if (modalRef.current === e.target) {

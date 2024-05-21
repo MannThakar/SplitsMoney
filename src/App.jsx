@@ -16,11 +16,9 @@ import GroupInfo from "./component/HeroSection/groupinfo";
 import AddExpense from "./component/HeroSection/addexpense";
 import Settings from "./component/HeroSection/settings";
 import GroupInvite from "./component/pages/groupinvite";
-import { UserProvider } from './component/utils/usercontext'
 
 function App() {
   return (
-    <UserProvider>
       <Routes>
         <Route>
           <Route path="/otp" element={<Otp />} />
@@ -44,7 +42,6 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </UserProvider>
   );
 }
 export default App;

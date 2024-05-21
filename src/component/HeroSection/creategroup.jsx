@@ -6,11 +6,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { ArrowLeft } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { ReceiptText } from 'lucide-react';
-import { UserContext } from '../utils/usercontext';
-import { useContext } from 'react';
 
 const CreateGroup = () => {
-    const { setUserData } = useContext(UserContext);
     const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
@@ -23,39 +20,37 @@ const CreateGroup = () => {
     });
 
     const HandleSubmit = async ({ name, description }, { setSubmitting }) => {
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_API}/groups`, {
-                name,
-                description,
-            }, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    Authorization: `Bearer ${localStorage.getItem('Token')}`
-                },
-            });
+        const type = 'group_expenses';
+        if (type === 'group_expenses') {
+            try {
+                const response = await axios.post(`${import.meta.env.VITE_API}/groups`, {
+                    name,
+                    description,
+                    type
+                }, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        Authorization: `Bearer ${localStorage.getItem('Token')}`
+                    },
 
-            console.log(response);
-
-            if (response.status === 200) {
-                const data = {
-                    ids: response.data.group.id,
-                    name: response.data.name,
-                    info: response.data.description,
-                };
-                const userInformation = {
-                    username: response.data.owner.name,
-                    useremail: response.data.owner.email,
-                };
-                setUserData(userInformation);
-                setTimeout(() => navigate('/home'), 5000);
-                navigate('/home', { state: data });
+                })
+                console.log(response);
+                if (response.status === 200) {
+                    const data = {
+                        ids: response.data.group.id,
+                        name: response.data.name,
+                        info: response.data.description,
+                    };
+                    setTimeout(() => navigate('/home'), 5000);
+                    navigate('/home', { state: data });
+                }
+            } catch (error) {
+                toast.error('Something went wrong');
             }
-        } catch (error) {
-            toast.error('Something went wrong');
+            setSubmitting(false);
         }
-        setSubmitting(false);
-    };
 
+    }
     return (
         <div className="bg-primaryColor min-h-screen flex flex-col items-center">
             <div className="py-3 flex gap-2 px-2 w-full">
