@@ -88,7 +88,7 @@ const Account = () => {
                     </button>
                 </div>
             </div>
-            {modal && <AccountModal onClose={() => setModal(false)} isEdit={isEdit} setIsEdit={setIsEdit} />}
+            {modal && <AccountModal onClose={() => setModal(false)}  isEdit={isEdit} setIsEdit={setIsEdit} />}
         </div>
     );
 };
