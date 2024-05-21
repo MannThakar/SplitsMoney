@@ -1,58 +1,48 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unescaped-entities */
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import cover from '../../assets/cover.svg';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { z } from 'zod';
+import LoginImg from '../../assets/Login.svg';
+import { Smartphone } from 'lucide-react';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const type = 'login';
 
-  // Define the Zod schema for phone number validation
-  const phoneSchema = z.object({
-    phone_no: z
-      .string()
-      .regex(/^\d{10}$/, { message: 'Phone number must be exactly 10 digits' }),
+  const validationSchema = Yup.object().shape({
+    phone_no: Yup.string()
+      .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits')
+      .required('Mobile number is required'),
   });
-
-  // Custom validation function combining Yup and Zod
-  const validate = async (values) => {
-    try {
-      phoneSchema.parse(values);
-    } catch (zodError) {
-      return zodError.errors.reduce((acc, err) => {
-        acc[err.path] = err.message;
-        return acc;
-      }, {});
-    }
-
-    return {};
-  };
 
   const handleSubmit = async ({ phone_no }, { setSubmitting }) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API}/send-otp?phone_no=${phone_no}&type=${type}`, {
-        phone_no, type
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/send-otp?phone_no=${phone_no}&type=${type}`,
+        {
+          phone_no,
+          type,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
         }
-      });
+      );
       if (response.status === 200) {
         const data = {
           otps: response.data.otp,
           phone_no,
-          type
+          type,
         };
-        setTimeout(() => navigate("/otp", { state: data }), 1000);
+        setTimeout(() => navigate('/otp', { state: data }), 1000);
       }
       if (response.data.original === 'User does not exist') {
-        toast.error("Please signup first");
+        toast.error('Please signup first');
       }
     } catch (error) {
       toast.error(error);
@@ -61,55 +51,77 @@ const SignIn = () => {
   };
 
   return (
-    <div className="px-2">
-      <Toaster position='top-center' toastOptions={{
-        duration: 2000,
-        style: {
-          background: '#363636',
-          color: '#fff',
-        },
-      }} />
-      <div className="bg-BrandColor h-svh rounded-2xl mx-auto">
-        <h1 className="font-poppins text-3xl pt-5 font-semibold text-center">Login</h1>
+    <div className="bg-primaryColor min-h-screen flex items-center justify-center">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
+      <div className="container mx-auto px-6 flex flex-col items-center justify-center">
+        <div className="flex justify-center mt-5">
+          <img src={LoginImg} alt="Login" className="w-40 h-40 md:w-52 md:h-52" />
+        </div>
+        <div className="font-satoshi text-center">
+          <h1 className="text-3xl font-bold text-white">Login</h1>
+          <p className="text-gray-600 mt-4">Please login to continue</p>
+        </div>
         <Formik
           initialValues={{ phone_no: '' }}
-          validate={validate}
+          validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
-            <Form className="px-3">
-              <div className="mb-4">
-                <label htmlFor="phone_no" className="flex justify-start mb-2 font-medium font-poppins">
-                  Mobile No
-                </label>
-                <Field
-                  type="number"
-                  id="phone_no"
+            <Form className="w-full max-w-sm">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Smartphone className="text-white" />
+                  <Field
+                    type="text"
+                    id="phone_no"
+                    name="phone_no"
+                    inputMode="numeric"
+                    className="w-full p-2 bg-transparent border-b-2 text-white md:max-w-xs"
+                    placeholder="PHONE"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value) && value.length <= 10) {
+                        setFieldValue('phone_no', value);
+                      }
+                    }}
+                  />
+                </div>
+                <ErrorMessage
                   name="phone_no"
-                  inputMode="numeric"
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^\d*$/.test(value) && value.length <= 10) {
-                      setFieldValue('phone_no', value);
-                    }
-                  }}
+                  component="div"
+                  className="text-sm text-red-500 text-center"
                 />
-                <ErrorMessage name="phone_no" component="div" className="text-sm flex justify-start text-red-500" />
+                <button
+                  type="submit"
+                  className="font-satoshi text-xl p-4 rounded-full w-full md:w-1/2 text-blue-950 mt-8 bg-buttonColor font-bold mx-auto"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending OTP...' : 'Get OTP'}
+                </button>
               </div>
-              <button type="submit" className="font-poppins text-xl px-6 py-2 rounded-lg bg-buttonColor hover:bg-red-600 text-white mt-4 w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending OTP...' : 'Get OTP'}
-              </button>
             </Form>
           )}
         </Formik>
-        <h2 className='pt-4 text-sm gap-1 flex justify-center font-medium text-black font-poppins'>Dont have an account? <Link to="/signup" className='text-blue-500'>Register</Link></h2>
-        <div className='flex justify-center mt-6'>
-          <img src={cover} alt='image' className='max-w-full h-auto' />
+        <div className="flex justify-center mt-8">
+          <h2 className="pt-4 text-sm gap-1 flex justify-center font-medium text-white font-satoshi">
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-buttonColor">
+              Register
+            </Link>
+          </h2>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignIn;
