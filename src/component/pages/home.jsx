@@ -1,16 +1,28 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import { Users } from 'lucide-react'
+import Navigations from "./navigation";
+import { UsersRound } from 'lucide-react';
+import { UserRound } from 'lucide-react';
+import { CircleUserRound } from 'lucide-react';
+
 const Home = () => {
   const params = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [runEffect, setRunEffect] = useState(true);
   const groupId = params.groupId;
   const [res, setRes] = useState([]);
   const colors = ["#7c3aed", "#0891b2", "#16a34a", "#ea580c"];
+
+  const isActive = (path) => location.pathname === path ? 'text-highlightColor' : 'text-white';
+
+  console.log("Current Path:", location.pathname);
 
   //View Group
   async function viewGroup() {
@@ -62,10 +74,10 @@ const Home = () => {
   //   }, 1000);
   //   return () => clearTimeout(Time);
   // }, [runEffect])
-  
-  const navigate = useNavigate();
+
+
   return (
-    <div>
+    <div className="bg-primaryColor h-svh">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -76,142 +88,65 @@ const Home = () => {
           },
         }}
       />
-      <div className="px-3 py-1 flex flex-row-reverse border-b border-gray-300 justify-between">
+      <div className="px-3 py-2 flex justify-between items-center flex-row-reverse  bg-opacity-50 backdrop-blur-sm">
+        <button>
+          <Users className="text-white" onClick={() => navigate('/groups/creategroup')} />
+        </button>
         <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="gray"
-              onClick={() => navigate("/creategroup")}
-              d="M12.5 11.95q.725-.8 1.113-1.825T14 8t-.387-2.125T12.5 4.05q1.5.2 2.5 1.325T16 8t-1 2.625t-2.5 1.325M18 20v-3q0-.9-.4-1.713t-1.05-1.437q1.275.45 2.363 1.163T20 17v3zm2-7v-2h-2V9h2V7h2v2h2v2h-2v2zM8 12q-1.65 0-2.825-1.175T4 8t1.175-2.825T8 4t2.825 1.175T12 8t-1.175 2.825T8 12m-8 8v-2.8q0-.85.438-1.562T1.6 14.55q1.55-.775 3.15-1.162T8 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T16 17.2V20z"
-            />
-          </svg>
-        </div>
-        <div className="flex justify-start">
-          <h1 className="text-lg text-black flex justify-start font-semibold">
-            Groups Details
-          </h1>
+          <h1 className="text-xl text-white font-semibold">Groups Details</h1>
         </div>
       </div>
       {res.length ? (
-        res?.map((e, index) => {
-          return (
-            <>
-              <div className="flex">
-                <Link
-                  className="flex gap-3 container mt-2"
-                  to={`/groups/${e.id}`}
-                >
-                  <div
-                    className="flex w-20 rounded-xl"
-                    style={{ backgroundColor: colors[index % colors.length] }}
-                  ></div>
-
-                  <h2 className="text-sm mt-2 flex justify-start items-center my-2 font-poppins text-black">
-                    <span className="text-xl font-poppins text-zinc-800">
-                      &nbsp; {e.name}
-                    </span>
-                  </h2>
-                </Link>
+        res.map((e, index) => (
+          <div key={index} className="w-11/12 mx-auto mt-4">
+            <Link to={`/groups/${e.id}`} className="block bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+              <div className="flex gap-5 items-center">
+                <div
+                  className="flex w-14 h-14 rounded-full"
+                  style={{ backgroundColor: colors[index % colors.length] }}
+                ></div>
+                <h2 className="text-lg font-semibold text-white">{e.name}</h2>
               </div>
-            </>
-          );
-        })
+            </Link>
+          </div>
+        ))
       ) : (
         <div className="flex justify-center my-4">
-          <h3 className='font-poppins text-lg'>No group available</h3>
+          <h3 className="font-satoshi text-lg text-white">No group available</h3>
         </div>
       )}
-      <>
-        <div className="flex justify-center items-center">
-          <div className="bg-white mt-2">
-            <button
-              className="h-10 px-5 font-poppins items-center rounded-lg text-base flex text-black bg-BrandColor hover:text-white hover:bg-red-200 flex-row-reverse gap-2"
-              onClick={() => navigate("/creategroup")}
-            >
-              Start a new group
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="gray"
-                  d="M12.5 11.95q.725-.8 1.113-1.825T14 8t-.387-2.125T12.5 4.05q1.5.2 2.5 1.325T16 8t-1 2.625t-2.5 1.325M18 20v-3q0-.9-.4-1.713t-1.05-1.437q1.275.45 2.363 1.163T20 17v3zm2-7v-2h-2V9h2V7h2v2h2v2h-2v2zM8 12q-1.65 0-2.825-1.175T4 8t1.175-2.825T8 4t2.825 1.175T12 8t-1.175 2.825T8 12m-8 8v-2.8q0-.85.438-1.562T1.6 14.55q1.55-.775 3.15-1.162T8 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T16 17.2V20z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-around w-full fixed bottom-0">
-          <button
-            className="flex flex-col justify-center items-center"
-            onClick={() => navigate("/group")}
-          >
-            <svg
-              className="flex items-center"
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="gray"
-                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3s1.34 3 3 3m-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5S5 6.34 5 8s1.34 3 3 3m0 2c-2.33 0-7 1.17-7 3.5V18c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5m8 0c-.29 0-.62.02-.97.05c.02.01.03.03.04.04c1.14.83 1.93 1.94 1.93 3.41V18c0 .35-.07.69-.18 1H22c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5"
-              />
-            </svg>
-            <span className="flex justify-start font-poppins text-gray-400">
-              Groups
-            </span>
-          </button>
 
-          <button
-            className="flex flex-col justify-center items-center"
-            onClick={() => navigate("/friends")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="gray"
-                d="M12 12q-1.65 0-2.825-1.175T8 8q0-1.65 1.175-2.825T12 4q1.65 0 2.825 1.175T16 8q0 1.65-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"
-              />
-            </svg>
-            <span className="flex justify-start font-poppins text-gray-400">
-              Friends
-            </span>
-          </button>
+      {/* <div className="flex justify-center items-center mt-6">
+        <button
+          className="bg-white bg-opacity-20 backdrop-blur-sm text-white font-semibold py-2 px-4 rounded-md shadow-lg flex items-center gap-2 hover:bg-opacity-30 transition-all duration-300"
+          onClick={() => navigate("/groups/creategroup")}
+        >
+          Start a new group
+          <Users />
+        </button>
+      </div> */}
 
-          <button
-            className="flex flex-col justify-center items-center"
-            onClick={() => navigate("/accounts")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="gray"
-                d="M5.85 17.1q1.275-.975 2.85-1.537T12 15q1.725 0 3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4Q8.675 4 6.337 6.338T4 12q0 1.475.488 2.775T5.85 17.1M12 13q-1.475 0-2.488-1.012T8.5 9.5q0-1.475 1.013-2.488T12 6q1.475 0 2.488 1.013T15.5 9.5q0 1.475-1.012 2.488T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22"
-              />
-            </svg>
-            <span className="flex justify-start font-poppins text-gray-400">
-              Account
-            </span>
-          </button>
-        </div>
-      </>
+      <div className="flex justify-around w-full fixed bottom-0 bg-primaryColor p-2">
+        <button className='flex flex-col justify-center items-center' onClick={() => navigate('/group')}>
+          <UsersRound className={`${isActive('/group')}`} />
+          <span className={`flex justify-start font-satoshi ${isActive('/group')}`}>Groups</span>
+        </button>
+
+        <button className="flex flex-col justify-center items-center" onClick={() => navigate("/friends")}>
+          <UserRound className={`${isActive('/friends')}`} />
+          <span className={`flex justify-start font-satoshi ${isActive('/friends')}`}>Friends</span>
+        </button>
+
+        <button className="flex flex-col justify-center items-center" onClick={() => navigate("/accounts")}>
+          <CircleUserRound className={`${isActive('/accounts')}`} />
+          <span className={`flex justify-start font-satoshi ${isActive('/accounts')}`}>Account</span>
+        </button>
+      </div>
+      <div>
+
+      </div>
     </div>
+
   );
 };
 

@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { X } from 'lucide-react';
+import { X, User, FilePenLine } from 'lucide-react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 function UpdateModal({ onClose, setGroup }) {
@@ -22,12 +23,13 @@ function UpdateModal({ onClose, setGroup }) {
                     Authorization: `Bearer ${localStorage.getItem("Token")}`,
                 },
             });
-            setGroupName(response.data.name)
-            setGroupDescription(response.data.description)
+            setGroupName(response.data.name);
+            setGroupDescription(response.data.description);
         } catch (error) {
             console.error("Error:", error);
         }
     }
+
     useEffect(() => {
         viewGroup();
     }, [id]);
@@ -47,17 +49,15 @@ function UpdateModal({ onClose, setGroup }) {
                         Authorization: `Bearer ${localStorage.getItem('Token')}`
                     }
                 }
-
             );
             onClose(false);
 
-            if (response.status == 200) {
-                setGroup(groupName)
-                toast.success('Invitation sent successfully')
+            if (response.status === 200) {
+                setGroup(groupName);
+                toast.success('Group updated successfully');
             } else {
-                toast.error('Error while sending invitation')
+                toast.error('Error while updating group');
             }
-
         } catch (error) {
             console.error('Error:', error);
         }
@@ -70,7 +70,7 @@ function UpdateModal({ onClose, setGroup }) {
     }
 
     return (
-        <div ref={modalRef} onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm ">
+        <div ref={modalRef} onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center">
             <Toaster
                 position="top-center"
                 toastOptions={{
@@ -81,29 +81,26 @@ function UpdateModal({ onClose, setGroup }) {
                     },
                 }}
             />
-
-
-            <div className='flex flex-col w-11/12 rounded-xl h-64 gap-3 mx-auto mt-12 bg-BrandColor items-center '>
-                <div className='flex justify-end pt-3 pr-3 w-full'>
+            <div className="bg-primaryColor w-11/12 h-64 py-4 md:w-2/5 rounded-xl mx-auto p-6">
+                <div className="flex justify-end">
                     <button onClick={onClose}>
-                        <X />
+                        <X className="text-white" />
                     </button>
                 </div>
-                <div className='flex flex-col gap-5'>
-                    <div className='flex justify-center'>
-                        <h1 className='font-poppins text-base'>Update group details</h1>
-
+                <h1 className="text-center font-satoshi text-xl text-white mb-4">Update group details</h1>
+                <form onSubmit={groupUpdate} className="space-y-4">
+                    <div className="flex items-center gap-2">
+                        <User className="text-white" />
+                        <input type="text" placeholder="Enter group name" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={groupName} required onChange={(e) => setGroupName(e.target.value)} />
                     </div>
-                    <div className='flex justify-center'>
-                        <form onSubmit={groupUpdate} className='pt-2 flex flex-col leading-4 gap-4'>
-                            <input type="text" placeholder='Enter group name' className='p-2 rounded-md font-poppins' value={groupName} required onChange={(e) => setGroupName(e.target.value)} />
-                            <input type="text" placeholder='Enter group description' className='p-2 rounded-md font-poppins' value={groupDescr} required onChange={(e) => setGroupDescription(e.target.value)} />
-                            <div className='flex justify-center'>
-                                <button type="submit" className='p-2 text-white font-poppins rounded-lg w-24 hover:text-black hover:bg-sky-200 bg-black'>Update</button>
-                            </div>
-                        </form>
+                    <div className="flex items-center gap-2">
+                        <FilePenLine className="text-white" />
+                        <input type="text" placeholder="Enter group description" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={groupDescr} required onChange={(e) => setGroupDescription(e.target.value)} />
                     </div>
-                </div>
+                    <div className="flex justify-center">
+                        <button type="submit" className="w-full md:w-1/2 p-2 text-black bg-buttonColor font-satoshi rounded-2xl">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     );

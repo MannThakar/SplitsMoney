@@ -5,22 +5,20 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import { z } from 'zod';
+import { Smartphone, Mail, User } from 'lucide-react';
 
 // Define the Yup schema for validation
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+  name: Yup.string()
+  .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces')
+  .required('Name is required'),
   email: Yup.string()
     .email('Invalid email address')
     .matches(/@.*\.com$/, { message: 'Email must include "@" and end with ".com"' })
     .required('Email is required'),
-});
-
-// Define the Zod schema for phone number validation
-const phoneSchema = z.object({
-  phone_no: z
-    .string()
-    .regex(/^\d{10}$/, { message: 'Phone number must be exactly 10 digits' }),
+  phone_no: Yup.string()
+    .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits')
+    .required('Mobile number is required'),
 });
 
 // Custom validation function combining Yup and Zod
@@ -35,7 +33,7 @@ const validate = async (values) => {
   }
 
   try {
-    phoneSchema.parse(values);
+    phoneSchema.parse({ phone_no: values.phone_no });
   } catch (zodError) {
     return zodError.errors.reduce((acc, err) => {
       acc[err.path] = err.message;
@@ -75,7 +73,7 @@ function SignUp() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen flex items-center justify-center bg-primaryColor">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -86,60 +84,84 @@ function SignUp() {
           },
         }}
       />
-      <div className="h-svh mx-2 p-9 rounded-2xl shadow-md bg-BrandColor">
-        <h2 className="mb-4 text-3xl font-semibold text-center font-poppins">Sign Up</h2>
+      <div className="w-full max-w-md p-6 md:p-9 shadow-md bg-primaryColor">
+        <h2 className="text-3xl font-semibold text-center text-white font-satoshi">Sign Up</h2>
         <Formik
           initialValues={{ type: '', phone_no: '', name: '', email: '' }}
-          validate={validate}
+          validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
-            <Form>
-              <div className="mb-4">
-                <label htmlFor="name" className="flex justify-start mb-2 text-base font-medium font-poppins">
-                  Name
-                </label>
-                <Field type="text" id="name" name="name" className="w-full p-2 border border-gray-300 rounded-md" />
-                <ErrorMessage name="name" component="div" className="text-sm flex justify-start text-red-500" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="flex justify-start mb-2 font-medium font-poppins">
-                  Email
-                </label>
-                <Field type="email" id="email" name="email" className="w-full p-2 border border-gray-300 rounded-md" />
-                <ErrorMessage name="email" component="div" className="text-sm flex justify-start text-red-500" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phone_no" className="flex justify-start mb-2 font-medium font-poppins">
-                  Mobile No
-                </label>
-                <Field
-                  type="number"
-                  id="phone_no"
-                  name="phone_no"
-                  inputMode="numeric"
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^\d*$/.test(value) && value.length <= 10) {
-                      setFieldValue('phone_no', value);
-                    }
-                  }}
-                />
-                <ErrorMessage name="phone_no" component="div" className="text-sm flex justify-start text-red-500" />
-              </div>
+            <div className="mt-7 gap-4">
+              <Form>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3">
+                    <User className="text-white" />
+                    <Field
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="FULL NAME"
+                      className="w-full p-2 border-b-2 bg-transparent text-white font-satoshi"
+                    />
+                  </div>
+                  <div className="flex justify-center md:justify-start md:pl-8">
+                    <ErrorMessage name="name" component="div" className="text-sm text-red-500" />
+                  </div>
 
-              <button
-                type="submit"
-                className="w-full py-2 font-medium text-white rounded-md bg-buttonColor hover:bg-red-600 font-poppins"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
-              </button>
-              <h2 className="pt-4 text-sm flex justify-center gap-1 font-medium text-black font-poppins">
-                Already have an account? <Link to="/signin" className="text-blue-500">Log in</Link>
-              </h2>
-            </Form>
+                  <div className="flex items-center gap-3">
+                    <Mail className="text-white" />
+                    <Field
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="EMAIL"
+                      className="w-full p-2 border-b-2 bg-transparent text-white font-satoshi"
+                    />
+                  </div>
+                  <div className="flex justify-center md:justify-start md:pl-8">
+                    <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <Smartphone className="text-white" />
+                    <Field
+                      type="text"
+                      id="phone_no"
+                      name="phone_no"
+                      inputMode="numeric"
+                      className="w-full p-2 bg-transparent border-b-2 text-white font-satoshi"
+                      placeholder="PHONE"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d*$/.test(value) && value.length <= 10) {
+                          setFieldValue('phone_no', value);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex justify-center md:justify-start md:pl-8">
+                    <ErrorMessage name="phone_no" component="div" className="text-sm text-red-500" />
+                  </div>
+                </div>
+
+                <div className="flex justify-center">
+                  <button
+                    type="submit"
+                    className="w-full mt-9 py-4 font-medium text-black rounded-full bg-buttonColor font-santoshi"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
+
+                <div className="flex justify-center mt-4">
+                  <h2 className="text-sm font-medium text-textColor font-santoshi">
+                    Already have an account? <Link to="/signin" className="text-buttonColor">Log in</Link>
+                  </h2>
+                </div>
+              </Form>
+            </div>
           )}
         </Formik>
       </div>
