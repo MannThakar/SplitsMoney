@@ -115,5 +115,6 @@ function UpdateModal({ onClose, setGroup }) {
             </div>
         </div>
 
-            )}
-                export default UpdateModal;
+    )
+}
+export default UpdateModal;

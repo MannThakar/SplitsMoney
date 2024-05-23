@@ -70,7 +70,7 @@ function Otp() {
             token_data: response.data.token,
           };
           storeToken(data.token_data);
-          setTimeout(() => navigate('/home', { state: data }), 7000);
+          setTimeout(() => navigate('/', { state: data }), 7000);
         } else {
           toast.error("Invalid OTP");
         }
@@ -85,7 +85,7 @@ function Otp() {
           }
         });
         if (response.status === 200) {
-          navigate('/home');
+          navigate('/');
         } else {
           toast.error("Invalid OTP");
         }
@@ -108,12 +108,12 @@ function Otp() {
           },
         }}
       />
-      <div className='p-3 flex justify-center mx-auto text-lg bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 w-32 text-white text-bold tracking-widest'>
+      <div className='p-3 flex justify-center mx-auto text-lg bg-stone-800 rounded-md w-32 text-white text-bold tracking-widest'>
         {otp}
       </div>
 
       <div className="flex flex-col justify-center items-center mt-5 w-full max-w-md">
-        <div className="p-8 bg-white bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-2xl w-full">
+        <div className="p-8 bg-stone-800 rounded-2xl w-full">
           <h1 className="text-2xl text-center text-white font-satoshi mb-2">Verification Code</h1>
           <p className="text-sm font-normal text-center text-white font-poppins mb-3">OTP sent to +91 {phone_no}</p>
           <div className="flex justify-center space-x-1 mt-3">
@@ -133,18 +133,18 @@ function Otp() {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-3">
-            <button className='p-2 font-satoshi rounded-md text-white border border-white' onClick={resendOtps}>Resend OTP</button>
-          </div>
           <div className="flex justify-center mt-5">
             <button
               type="submit"
-              className="text-base font-bold bg-buttonColor rounded-full p-4 font-satoshi w-full md:w-1/2 text-black"
+              className="text-lg font-bold hover:border-4 hover:border-textColor bg-buttonColor rounded-full py-2 font-satoshi w-2/4 text-black"
               onClick={handleOtp}
               disabled={loading}
             >
               {loading ? 'Verifying...' : 'Verify'}
             </button>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button className='font-satoshi font-bold text-base rounded-md text-textColor' onClick={resendOtps}>Resend OTP</button>
           </div>
         </div>
       </div>
