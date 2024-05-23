@@ -7,13 +7,13 @@ import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-function AccountModal({ onClose, setGroup, isEdit, setIsEdit }) {
+function AccountModal({ onClose, setGroup, isEdit, setIsEdit, id }) {
     const modalRef = useRef();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    const { id } = useParams();
+    // const { id } = useParams();
 
     // Account Owner Information
     async function viewAccountStatus() {
@@ -84,7 +84,7 @@ function AccountModal({ onClose, setGroup, isEdit, setIsEdit }) {
                     },
                 }}
             />
-            <div className="bg-primaryColor w-11/12 h-80 py-4 md:w-2/5 rounded-xl mx-auto p-6">
+            <div className="bg-stone-800 w-11/12 h-80 py-4 md:w-2/5 rounded-xl mx-auto p-6">
                 <div className="flex justify-end">
                     <button onClick={onClose}>
                         <X className="text-white" />
@@ -105,7 +105,7 @@ function AccountModal({ onClose, setGroup, isEdit, setIsEdit }) {
                         <input
                             type='number'
                             placeholder="PHONE NO"
-                            className='flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white'
+                            className='flex-1 p-2 font-mono border-b-2 bg-transparent text-white'
                             value={phone}
                             required
                             onChange={(e) => {
@@ -117,7 +117,7 @@ function AccountModal({ onClose, setGroup, isEdit, setIsEdit }) {
                         />
                     </div>
                     <div className="flex justify-center">
-                        <button type="submit" className="w-full md:w-1/2 p-2 text-black bg-buttonColor font-satoshi rounded-2xl">Save Changes</button>
+                        <button type="submit" className="w-2/4  p-2 text-black bg-buttonColor font-satoshi font-bold rounded-2xl">Save Changes</button>
                     </div>
                 </form>
             </div>

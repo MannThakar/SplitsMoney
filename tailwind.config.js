@@ -6,7 +6,7 @@ export default {
 			fontFamily: {
 				poppins: ["Poppins", "sans-serif"],
 				panchang: ["Panchang", "sans-serif"],
-				satoshi: ["Satoshi", "sans-serif"],
+				satoshi: ["Habibi", "serif"],
 			},
 			screens: {
 				xxs: "320px",
@@ -30,11 +30,11 @@ export default {
 				},
 			},
 			colors: {
-				textColor: "#4a4754",
-				primaryColor: "#201a31",
-				buttonColor: "#0df5e3",
+				textColor: "#29B6F6",
+				primaryColor: "#000000",
+				buttonColor: "#ffffff",
 				highlightColor: "#FFD700",
-				boxColor:'#857f95'
+				boxColor: "#857f95",
 			},
 		},
 

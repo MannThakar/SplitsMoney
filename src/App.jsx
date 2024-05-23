@@ -3,7 +3,7 @@
 import "./App.css";
 import Otp from "./component/pages/otp";
 import SignIn from "./component/pages/signin";
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route, useParams, Navigate } from "react-router-dom";
 import SignUp from "./component/pages/signup";
 import Home from "./component/pages/home";
 import PageNotFound from "./component/pages/pagenotfound";
@@ -26,19 +26,22 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         {/* <Route path="*" element={<PageNotFound />} /> */}
         <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
+
         <Route element={<PrivateRoute />}>
-          <Route path="/groups">
+          <Route path="*" element={<Navigate to="/" />}></Route>
+          <Route path="/group">
             <Route path=":id" element={<GroupInfo />} />
             <Route path=":id/settings" element={<Settings />} />
+            <Route path=":id/addexpense" element={<AddExpense />} />
           </Route>
           <Route path="/groupinfo/:id" element={<GroupInfo />} />
-          <Route path="/addexpense" element={<AddExpense />} />
-          <Route path="/groups/creategroup" element={<CreateGroup />} />
-          <Route path="/group" element={<Groups />} />
-          <Route path="/home" element={<Home />}></Route>
+          <Route path="/group/creategroup" element={<CreateGroup />} />
+          <Route path="/" element={<Home />}></Route>
           <Route path="/accounts" element={<Account />} />
           <Route path="/friends" element={<Friends />} />
-          <Route path="/settings" element={<Settings />} />
+          {/* <Route path="/addexpense" element={<AddExpense />} /> */}
+          {/* <Route path="/settings" element={<Settings />} /> */}
+          {/* <Route path="/group" element={<Groups />} /> */}
         </Route>
       </Route>
     </Routes>
