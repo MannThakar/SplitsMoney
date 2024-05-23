@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
@@ -5,6 +6,7 @@ import { useParams } from 'react-router-dom'
 const GroupInvite = () => {
 
     const { id } = useParams();
+    console.log(id)
     useEffect(() => {
         checkInvitation();
     }, [])

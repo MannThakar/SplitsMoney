@@ -4,6 +4,7 @@ const Group = () => {
     return (
         <div>
             <Home />
+            
         </div>
     );
 }

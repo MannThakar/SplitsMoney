@@ -10,7 +10,7 @@ const Navigation = () => {
     };
     return (
         <div className="nav">
-            <NavLink style={navLinkStyles} to="/group">
+            <NavLink style={navLinkStyles} to="/home">
             </NavLink>
             <NavLink style={navLinkStyles} to="/friends">
             </NavLink>

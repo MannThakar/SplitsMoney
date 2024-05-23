@@ -63,12 +63,11 @@ const SignIn = () => {
         }}
       />
       <div className="container mx-auto px-6 flex flex-col items-center justify-center">
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center">
           <img src={LoginImg} alt="Login" className="w-40 h-40 md:w-52 md:h-52" />
         </div>
         <div className="font-satoshi text-center">
           <h1 className="text-3xl font-bold text-white">Login</h1>
-          <p className="text-gray-600 mt-4">Please login to continue</p>
         </div>
         <Formik
           initialValues={{ phone_no: '' }}
@@ -76,7 +75,7 @@ const SignIn = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
-            <Form className="w-full max-w-sm">
+            <Form className="w-full max-w-sm mt-4">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 md:gap-3">
                   <Smartphone className="text-white" />
@@ -85,8 +84,8 @@ const SignIn = () => {
                     id="phone_no"
                     name="phone_no"
                     inputMode="numeric"
-                    className="w-full p-2 bg-transparent border-b-2 text-white md:max-w-xs"
-                    placeholder="PHONE"
+                    className="w-full p-2 bg-transparent text-base border-b-2 text-white md:max-w-xs"
+                    placeholder="Phone"
                     onChange={(e) => {
                       const value = e.target.value;
                       if (/^\d*$/.test(value) && value.length <= 10) {
@@ -98,11 +97,11 @@ const SignIn = () => {
                 <ErrorMessage
                   name="phone_no"
                   component="div"
-                  className="text-sm text-red-500 text-center"
+                  className="text-sm text-red-500 pl-8 md:pl-8 flex justify-start"
                 />
                 <button
                   type="submit"
-                  className="font-satoshi text-xl p-4 rounded-full w-full md:w-1/2 text-blue-950 mt-8 bg-buttonColor font-bold mx-auto"
+                  className="font-satoshi hover:border-4 hover:border-textColor text-lg py-2 rounded-full w-2/4  text-black mt-8 bg-buttonColor font-bold mx-auto"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Sending OTP...' : 'Get OTP'}
@@ -111,10 +110,10 @@ const SignIn = () => {
             </Form>
           )}
         </Formik>
-        <div className="flex justify-center mt-8">
-          <h2 className="pt-4 text-sm gap-1 flex justify-center font-medium text-white font-satoshi">
+        <div className="flex justify-center mt-4">
+          <h2 className="text-sm gap-1 flex justify-center font-medium text-white font-satoshi">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-buttonColor">
+            <Link to="/signup" className="text-textColor">
               Register
             </Link>
           </h2>

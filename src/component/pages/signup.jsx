@@ -10,8 +10,8 @@ import { Smartphone, Mail, User } from 'lucide-react';
 // Define the Yup schema for validation 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-  .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces')
-  .required('Name is required'),
+    .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces')
+    .required('Name is required'),
   email: Yup.string()
     .email('Invalid email address')
     .matches(/@.*\.com$/, { message: 'Email must include "@" and end with ".com"' })
@@ -101,11 +101,11 @@ function SignUp() {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="FULL NAME"
-                      className="w-full p-2 border-b-2 bg-transparent text-white font-satoshi"
+                      placeholder="Full Name"
+                      className="w-full p-2 text-base border-b-2 bg-transparent text-white font-satoshi"
                     />
                   </div>
-                  <div className="flex justify-center md:justify-start md:pl-8">
+                  <div className="flex justify-start ml-8 md:justify-start">
                     <ErrorMessage name="name" component="div" className="text-sm text-red-500" />
                   </div>
 
@@ -115,11 +115,11 @@ function SignUp() {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="EMAIL"
-                      className="w-full p-2 border-b-2 bg-transparent text-white font-satoshi"
+                      placeholder="Email"
+                      className="w-full p-2 text-base border-b-2 bg-transparent text-white font-satoshi"
                     />
                   </div>
-                  <div className="flex justify-center md:justify-start md:pl-8">
+                  <div className="flex justify-start md:justify-start ml-8 md:pl-8">
                     <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
                   </div>
 
@@ -130,8 +130,8 @@ function SignUp() {
                       id="phone_no"
                       name="phone_no"
                       inputMode="numeric"
-                      className="w-full p-2 bg-transparent border-b-2 text-white font-satoshi"
-                      placeholder="PHONE"
+                      className="w-full p-2 bg-transparent text-base border-b-2 text-white font-mono"
+                      placeholder="Phone"
                       onChange={(e) => {
                         const value = e.target.value;
                         if (/^\d*$/.test(value) && value.length <= 10) {
@@ -140,15 +140,15 @@ function SignUp() {
                       }}
                     />
                   </div>
-                  <div className="flex justify-center md:justify-start md:pl-8">
+                  <div className="flex justify-start md:justify-start ml-8 md:pl-8">
                     <ErrorMessage name="phone_no" component="div" className="text-sm text-red-500" />
                   </div>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center ">
                   <button
                     type="submit"
-                    className="w-full mt-9 py-4 font-medium text-black rounded-full bg-buttonColor font-santoshi"
+                    className="w-2/4 hover:border-4 hover:border-textColor mt-9 py-2 font-bold text-lg text-black rounded-full bg-buttonColor font-santoshi"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
@@ -156,8 +156,8 @@ function SignUp() {
                 </div>
 
                 <div className="flex justify-center mt-4">
-                  <h2 className="text-sm font-medium text-textColor font-santoshi">
-                    Already have an account? <Link to="/signin" className="text-buttonColor">Log in</Link>
+                  <h2 className="text-sm font-medium text-white font-santoshi">
+                    Already have an account? <Link to="/signin" className="text-textColor">Log in</Link>
                   </h2>
                 </div>
               </Form>

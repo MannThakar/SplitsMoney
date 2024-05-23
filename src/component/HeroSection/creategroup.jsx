@@ -41,8 +41,8 @@ const CreateGroup = () => {
                         name: response.data.name,
                         info: response.data.description,
                     };
-                    setTimeout(() => navigate('/home'), 5000);
-                    navigate('/home', { state: data });
+                    setTimeout(() => navigate('/'), 5000);
+                    navigate('/', { state: data });
                 }
             } catch (error) {
                 toast.error('Something went wrong');
@@ -61,12 +61,12 @@ const CreateGroup = () => {
                         color: '#fff',
                     },
                 }} />
-                <button className='flex items-center flex-row-reverse gap-2' onClick={() => navigate('/home')}>
+                <button className='flex items-center flex-row-reverse gap-2' onClick={() => navigate(-1)}>
                     <h2 className='text-white text-base font-satoshi'>back</h2>
                     <ArrowLeft className='text-white' />
                 </button>
             </div>
-            <h1 className="font-santoshi text-white text-2xl flex justify-center items-center mb-4">Create a group</h1>
+            <h1 className="font-santoshi text-white text-3xl flex justify-center items-center mb-4">Create a group</h1>
             <div className="w-full max-w-md px-4">
                 <Formik
                     initialValues={{ name: '', description: '' }}
@@ -80,7 +80,7 @@ const CreateGroup = () => {
                                     <Users className='text-white' />
                                     <Field type='text' name="name" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group name" />
                                 </div>
-                                <div className='flex justify-center'>
+                                <div className='flex justify-start ml-8'>
                                     <ErrorMessage name="name" component="div" className="text-sm text-red-500" />
                                 </div>
 
@@ -88,12 +88,12 @@ const CreateGroup = () => {
                                     <ReceiptText className='text-white' />
                                     <Field type='text' name="description" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group description" />
                                 </div>
-                                <div className='flex justify-center'>
+                                <div className='flex justify-start ml-8'>
                                     <ErrorMessage name="description" component="div" className="text-sm text-red-500" />
                                 </div>
                             </div>
-                            <div className="flex justify-end">
-                                <button type='submit' className="text-xl w-full md:w-1/2 py-2 md:py-4 h-10 flex items-center justify-center rounded-full bg-buttonColor font-santoshi font-semibold text-black" disabled={isSubmitting}>
+                            <div className="flex justify-center">
+                                <button type='submit' className="text-xl hover:border-4 hover:border-textColor  w-2/4 py-2 md:py-4 h-10 flex items-center justify-center rounded-full bg-buttonColor font-santoshi font-semibold text-black" disabled={isSubmitting}>
                                     {isSubmitting ? 'Wait...' : 'Done'}
                                 </button>
                             </div>
