@@ -33,32 +33,9 @@ function Modal({ onClose }) {
             );
 
             if (response.status === 200) {
-                const receivedToken = response.data.token;
-                setToken(receivedToken);
-                localStorage.setItem('Invite Token', receivedToken);
-
-                const inviteResponse = axios.post(
-                    `${import.meta.env.VITE_API}/invite-group/?token=${receivedToken}`,
-                    { token: receivedToken },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    }
-                );
-
-                if (inviteResponse.status === 200) {
-                    console.log('Invitation sent successfully');
-                    // toast.success('Invitation sent successfully');
-                } else if (inviteResponse.status === 400) {
-                    alert('Invalid invitation');
-                    navigate('/signup');
-                } else {
-                    console.error('Error while sending invitation');
-                    // toast.error('Error while sending invitation');
-                    navigate('/signup');
-                }
+                // const receivedToken = response.data.token;
+                // setToken(receivedToken);
+                // localStorage.setItem('Invite Token', receivedToken);
                 onClose(false);
             } else {
                 console.error('Error while sending invitation');

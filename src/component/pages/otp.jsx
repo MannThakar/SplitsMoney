@@ -84,7 +84,9 @@ function Otp() {
             'X-Requested-With': 'XMLHttpRequest'
           }
         });
+        const save = response.data.token;
         if (response.status === 200) {
+          localStorage.setItem('Token', save)
           navigate('/');
         } else {
           toast.error("Invalid OTP");
@@ -144,7 +146,7 @@ function Otp() {
             </button>
           </div>
           <div className="flex justify-center mt-4">
-            <button className='font-satoshi font-bold text-base rounded-md text-textColor' onClick={resendOtps}>Resend OTP</button>
+            <button className='font-satoshi font-bold text-base rounded-md text-textColor' onClick={resendOtps}>Resend Otp</button>
           </div>
         </div>
       </div>

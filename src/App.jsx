@@ -16,14 +16,37 @@ import GroupInfo from "./component/HeroSection/groupinfo";
 import AddExpense from "./component/HeroSection/addexpense";
 import Settings from "./component/HeroSection/settings";
 import GroupInvite from "./component/pages/groupinvite";
+import InviteMember from "./component/pages/invitemember";
+import PublicRoute from "./component/auth/publicroute";
 
 function App() {
   return (
     <Routes>
       <Route>
-        <Route path="/otp" element={<Otp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/otp"
+          element={
+            <PublicRoute>
+              <Otp />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <PublicRoute>
+              <SignIn />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
+        />
         {/* <Route path="*" element={<PageNotFound />} /> */}
         <Route path='/group-invite/:token' element={<GroupInvite />}></Route>
 
@@ -35,9 +58,10 @@ function App() {
             <Route path=":id/addexpense" element={<AddExpense />} />
           </Route>
           <Route path="/groupinfo/:id" element={<GroupInfo />} />
-          <Route path="/group/creategroup" element={<CreateGroup />} />
+          <Route path="/creategroup" element={<CreateGroup />} />
           <Route path="/" element={<Home />}></Route>
           <Route path="/accounts" element={<Account />} />
+          <Route path="/invite-member/:token" element={<InviteMember />}></Route>
           <Route path="/friends" element={<Friends />} />
           {/* <Route path="/addexpense" element={<AddExpense />} /> */}
           {/* <Route path="/settings" element={<Settings />} /> */}
