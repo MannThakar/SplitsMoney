@@ -66,7 +66,6 @@ function SignUp() {
         setTimeout(() => navigate('/otp', { state: data }), 2000);
       }
     } catch (error) {
-      toast.error('Something went wrong');
       console.error('Error:', error);
     }
     setSubmitting(false);
