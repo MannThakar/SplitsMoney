@@ -1,33 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import Modal from "../../component/modal/modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ArrowLeft, User, Mail, Settings, UsersRound, UserRound, CircleUserRound, ReceiptText, UserRoundPlus } from 'lucide-react';
+import { ArrowLeft, Settings, UsersRound, UserRound, CircleUserRound, ReceiptText, UserRoundPlus } from 'lucide-react';
 
 const GroupInfo = () => {
-  const [groups, setGroups] = useState([]);
-  const [group, setGroup] = useState(null);
-  const [modals, setModals] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
-
+  const [group, setGroup] = useState(null);
+  const [modals, setModals] = useState(false);
+  const [expense, setExpenseList] = useState('');
   const isActive = (path) => location.pathname === path ? 'text-highlightColor' : 'text-white';
-
-  const getFriends = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API}/users`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-        },
-      });
-      setGroups(res.data);  // Assuming the data you need is in res.data
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const groupColor = location.state?.color || '#7c3aed'; // Default color if none is passed
 
   const getGroupApi = async () => {
     try {
@@ -42,9 +27,22 @@ const GroupInfo = () => {
     }
   };
 
+  const expenseList = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API}/expenses/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+        },
+      });
+      setExpenseList(res.data);
+    } catch (error) {
+      console.error("Expense List", error);
+    }
+  };
+
   useEffect(() => {
-    getFriends();
     getGroupApi();
+    expenseList();
   }, [id]);
 
   return (
@@ -54,14 +52,16 @@ const GroupInfo = () => {
           <h2 className='text-white text-base font-satoshi'>back</h2>
           <ArrowLeft className='text-white' />
         </button>
-        <Link to={`/group/${id}/settings`}>
-        <Settings onClick={() => navigate('/settings')} className='text-white hover:text-textColor' />
+        <Link to={`/group/${id}/settings`} state={{ color: groupColor }}>
+          <Settings className='text-white hover:text-textColor' />
         </Link>
       </div>
 
-      <div className="w-14 h-14 absolute bg-red-500 top-11 left-10 rounded-2xl"></div>
+      <div
+        className="w-14 h-14 absolute top-11 left-10 rounded-2xl"
+        style={{ backgroundColor: groupColor }}
+      ></div>
 
-      {/* Group name and description */}
       <div className="relative top-16">
         <div className="absolute left-10">
           <h1 className="font-satoshi text-lg text-white">{group?.name}</h1>
@@ -79,36 +79,28 @@ const GroupInfo = () => {
         </div>
       </div>
 
-      {/* Add member button */}
-      <a
-        className="relative top-36 gap-4 flex items-center justify-center"
-        onClick={() => setModals(true)}
-      >
-        <button className="flex gap-1 bg-white hover:border-4 hover:border-textColor  backdrop-blur-sm rounded-2xl py-2 shadow-lg px-4">
+      <a className="relative top-36 gap-4 flex items-center justify-center" onClick={() => setModals(true)}>
+        <button className="flex gap-1 bg-white hover:border-4 hover:border-textColor backdrop-blur-sm rounded-2xl py-2 shadow-lg px-4">
           <UserRoundPlus className='text-black' />
-          <h3 className="font-satoshi text-lg flex items-center font-bold bg-white text-black ">Add group members</h3>
+          <h3 className="font-satoshi text-lg flex items-center font-bold bg-white text-black">Add group members</h3>
         </button>
       </a>
-
+      <h2 className='text-white'>{expense}</h2>
       <div className="flex justify-around w-full fixed bottom-0 bg-primaryColor p-2">
-
         <button className="flex flex-col justify-center items-center" onClick={() => navigate("/")}>
           <UsersRound className={`size-5 ${isActive('/')}`} />
           <span className={`flex justify-start text-base font-satoshi ${isActive('/')}`}>Groups</span>
         </button>
-
         <button className="flex flex-col justify-center items-center" onClick={() => navigate("/friends")}>
           <UserRound className={`size-5 ${isActive('/friends')}`} />
           <span className={`flex justify-start text-base font-satoshi ${isActive('/friends')}`}>Friends</span>
         </button>
-
         <button className="flex flex-col justify-center items-center" onClick={() => navigate("/accounts")}>
           <CircleUserRound className={`size-5 ${isActive('/accounts')}`} />
           <span className={`flex justify-start text-base font-satoshi ${isActive('/accounts')}`}>Account</span>
         </button>
       </div>
-
-      {modals && <Modal onClose={() => setModals(false)} ids={id} />}
+      {modals && <Modal setOpenModal={setModals} groupId={id} />}
     </div>
   );
 };

@@ -35,7 +35,13 @@ const Account = () => {
     const [phone, setPhone] = useState(null)
     const navigate = useNavigate();
     const handleLogout = () => {
-        localStorage.removeItem('Token');
+        const f = 'Token'
+        if (f == 'Token') {
+            localStorage.removeItem('Token');
+        }
+        else {
+            localStorage.removeItem('Token')
+        }
         navigate('/signin');
     };
 

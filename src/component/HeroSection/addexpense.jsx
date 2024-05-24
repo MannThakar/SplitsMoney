@@ -39,7 +39,7 @@ const AddExpense = () => {
             });
             console.log(response.data);
             setSubmitting(false);
-            navigate('/');
+            navigate(-1);
         } catch (error) {
             console.log(error);
         }
