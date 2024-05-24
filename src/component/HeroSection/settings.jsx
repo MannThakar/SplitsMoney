@@ -4,8 +4,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Group, X } from 'lucide-react';
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect, useRef } from 'react'
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
 import Modal from "../modal/modal";
 import { toast, Toaster } from 'react-hot-toast';
 import axios from 'axios';
@@ -13,13 +13,14 @@ import UpdateModal from "../modal/updatemodal";
 import { ArrowLeft, Pencil, Users, Trash } from 'lucide-react';
 
 const Settings = ({ onClose }) => {
-    const modalRef = useRef();
-    const [modal, setModal] = useState(false)
-    const [modals, setModals] = useState(false)
-    const [update, setUpdate] = useState(false)
+    const [modal, setModal] = useState(false);
+    const [modals, setModals] = useState(false);
+    const [update, setUpdate] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+    const location = useLocation();
     const [group, setGroup] = useState(null);
+    const groupColor = location.state?.color || '#7c3aed'; // Default color if none is passed
 
     const getGroupApi = async () => {
         const res = await axios.get(`${import.meta.env.VITE_API}/groups/${id}`, {
@@ -28,18 +29,15 @@ const Settings = ({ onClose }) => {
             },
         });
         setGroup(res.data.name);
-        console.log(res)
     };
 
     useEffect(() => {
         getGroupApi();
     }, [id]);
 
-
     const editGroup = () => {
         setUpdate(true);
-    }
-
+    };
 
     //Delete Group
     const handleDelete = async (id) => {
@@ -57,9 +55,9 @@ const Settings = ({ onClose }) => {
                 if (res.status === 200) {
                     navigate('/'); // Redirect to home after deletion
                 } else {
-                    toast.error(res)
+                    toast.error(res);
                 }
-                console.log(res)
+                console.log(res);
 
             } catch (error) {
                 console.error("Error:", error);
@@ -96,7 +94,7 @@ const Settings = ({ onClose }) => {
 
                 {/* Group name and edit functionality*/}
                 <div className='flex my-3 items-center justify-between'>
-                    <div className='h-16 w-16 bg-red-400 rounded-2xl'> </div>
+                    <div className='h-14 w-14 rounded-2xl' style={{ backgroundColor: groupColor }}> </div>
                     <span className="font-satoshi text-white text-lg">{group}</span>
                     <button>
                         <Pencil className='text-white hover:text-textColor' onClick={editGroup} />
@@ -135,5 +133,3 @@ const Settings = ({ onClose }) => {
     )
 }
 export default Settings;
-
-
