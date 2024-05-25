@@ -96,7 +96,7 @@ function AccountModal({ onClose, setGroup, isEdit, setIsEdit, id }) {
                 <form onSubmit={accountUpdate} className="space-y-4">
                     <div className="flex items-center gap-2">
                         <User className="text-white" />
-                        <input type="text" placeholder="Group name" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={name} required onChange={(e) => setName(e.target.value)} />
+                        <input type="text" placeholder="Your name" className="flex-1 p-2 font-satoshi border-b-2 bg-transparent text-white" value={name} required onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-2">
                         <Mail className="text-white" />

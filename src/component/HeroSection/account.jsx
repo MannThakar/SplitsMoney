@@ -142,7 +142,7 @@ const Account = () => {
                     <p className="text-lg flex-grow">{phone}</p>
                 </div>
                 <button
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="bg-white hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                     onClick={() => setLogout(true)}
                 >
                     Logout

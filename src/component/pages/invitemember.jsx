@@ -2,7 +2,11 @@
 // import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import VerifyLoaderComponent from '../utils/VerifyLoaderComponent'
+=======
+import VerifyLoaderComponent from '../utils/verifyloadercomponent'
+>>>>>>> 5822a1837d6e3ac803a8a8c011116fdd15ff5424
 import axios from 'axios';
 const GroupInvite = () => {
     
@@ -35,7 +39,11 @@ const GroupInvite = () => {
                 alert("Invalid Token")
             } else if (response.status === 200) {
                 console.log(response)
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 5822a1837d6e3ac803a8a8c011116fdd15ff5424
                 /* console.log('Invitation sent successfully'); */
             } else {
                 console.log('Error while sending invitation');

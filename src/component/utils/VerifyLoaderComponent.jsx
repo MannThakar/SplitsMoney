@@ -1,4 +1,3 @@
-
 import styled, { keyframes } from 'styled-components';
 
 // Define the keyframe animations
@@ -52,16 +51,16 @@ const VerificationText = styled.p`
 `;
 
 const VerificationLoaderComponent = () => {
-  return (
-    <VerificationWrapper>
-      <DotLoader>
-        <div />
-        <div />
-        <div />
-      </DotLoader>
-      <VerificationText>Verifying the user...</VerificationText>
-    </VerificationWrapper>
-  );
+    return (
+        <VerificationWrapper>
+            <DotLoader>
+                <div />
+                <div />
+                <div />
+            </DotLoader>
+            <VerificationText>Verifying the user...</VerificationText>
+        </VerificationWrapper>
+    );
 };
 
 export default VerificationLoaderComponent;
