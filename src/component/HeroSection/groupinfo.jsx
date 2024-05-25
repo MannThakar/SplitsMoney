@@ -63,7 +63,6 @@ const GroupInfo = () => {
           style={{ backgroundColor: groupColor }}
         ></div>
         <div>
-<<<<<<< HEAD
           <h1 className=" text-lg text-white">{group?.name}</h1>
           <h2 className=" text-sm text-white">{group?.description}</h2>
         </div>
@@ -71,13 +70,6 @@ const GroupInfo = () => {
 
 
       {expenses.length === 0 && <div className="flex justify-center items-center h-1/2 text-white"> <h1>No expense added</h1> </div>}
-=======
-          <h1 className="font-satoshi text-lg text-white">{group?.name}</h1>
-          <h2 className="font-satoshi text-sm text-white">{group?.description}</h2>
-        </div>
-      </div>
-
->>>>>>> 5822a1837d6e3ac803a8a8c011116fdd15ff5424
       <div className="flex-1 overflow-y-auto px-3 py-4 mb-20"> {/* Adjusted for spacing */}
         {expenses.map((expense) => {
           const date = new Date(expense.date);
@@ -88,7 +80,6 @@ const GroupInfo = () => {
           return (
             <div key={expense.id} className="my-4 p-4 bg-stone-700 rounded-lg shadow-lg">
               <div className="flex justify-between items-center mb-2">
-<<<<<<< HEAD
 
                 <div className="bg-stone-600 p-3 rounded-lg">
                   <span className="text-white text-lg">{expense.description}</span>
@@ -103,20 +94,6 @@ const GroupInfo = () => {
                 <div className=" p-2 rounded-lg">
                   <span className=" text-white  text-lg">You paid</span>
                   <span className="font-bold text-white text-lg ml-2 font-sans">₹{expense.amount}</span>
-=======
-                <div>
-                  <span className="font-bold font-satoshi text-lg text-white">{month} {year}</span>
-                </div>
-                <div className="bg-stone-600 p-2 rounded-lg">
-                  <span className="text-sm text-white font-satoshi">{expense.description}</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-satoshi  font-bold text-white">{month} {day}</span>
-                <div className="bg-stone-500 p-2 rounded-lg">
-                  <span className="text-sm text-white font-satoshi">You paid</span>
-                  <span className="font-bold text-black text-lg ml-2 font-sans">₹{expense.amount}</span>
->>>>>>> 5822a1837d6e3ac803a8a8c011116fdd15ff5424
                 </div>
               </div>
             </div>
@@ -125,11 +102,7 @@ const GroupInfo = () => {
       </div>
 
       <Link to={`/group/${id}/addexpense`}>
-<<<<<<< HEAD
         <button className='fixed bottom-20 right-5 text-black w-40 hover:border-4 hover:border-textColor  bg-buttonColor font-bold gap-1 py-2 flex justify-center items-center rounded-full'>
-=======
-        <button className='fixed bottom-20 right-5 text-black w-40 hover:border-4 hover:border-textColor font-satoshi bg-buttonColor font-bold gap-1 py-2 flex justify-center items-center rounded-full'>
->>>>>>> 5822a1837d6e3ac803a8a8c011116fdd15ff5424
           <ReceiptText className='text-black' />Add expense
         </button>
       </Link>
