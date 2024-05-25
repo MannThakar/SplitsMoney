@@ -11,9 +11,7 @@ const AddExpense = () => {
     console.log("Current Path:", location.pathname);
     const navigate = useNavigate();
     const { id } = useParams();  // Retrieve group_id from URL parameters
-    console.log(id)
     const group_id = id;
-    console.log(group_id)
     const payer_user_id = 2; // Assuming payer_user_id is stored in localStorage
 
     const validationSchema = Yup.object().shape({

@@ -78,7 +78,7 @@ const CreateGroup = () => {
                             <div className='py-4 flex flex-col gap-4'>
                                 <div className='flex items-center gap-3'>
                                     <Users className='text-white' />
-                                    <Field type='text' name="name" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group name" />
+                                    <Field type='text' name="name" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group name" maxLength={255} />
                                 </div>
                                 <div className='flex justify-start ml-8'>
                                     <ErrorMessage name="name" component="div" className="text-sm text-red-500" />
@@ -86,7 +86,7 @@ const CreateGroup = () => {
 
                                 <div className='flex items-center gap-3'>
                                     <ReceiptText className='text-white' />
-                                    <Field type='text' name="description" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group description" />
+                                    <Field type='text' name="description" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group description" maxLength={255} />
                                 </div>
                                 <div className='flex justify-start ml-8'>
                                     <ErrorMessage name="description" component="div" className="text-sm text-red-500" />

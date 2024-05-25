@@ -1,14 +1,16 @@
 
 // import axios from 'axios';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import VerifyLoaderComponent from '../utils/VerifyLoaderComponent'
 import axios from 'axios';
 const GroupInvite = () => {
-    const { token } = useParams()
+    
     const navigate = useNavigate();
-    console.log(token)
+
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('token');
+    
 
     useEffect(() => {
         checkInvitation();
@@ -30,8 +32,7 @@ const GroupInvite = () => {
 
 
             if (response.status === 400) {
-                localStorage.setItem('member-token', token)
-                navigate('/signup');
+                alert("Invalid Token")
             } else if (response.status === 200) {
                 console.log(response)
                     
