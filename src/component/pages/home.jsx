@@ -12,6 +12,7 @@ import { UserRound } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react';
 
 
+
 //   useEffect(() => {
 //     // const token = localStorage.getItem('member-token');
 //     // console.log(token)
@@ -69,6 +70,7 @@ const Home = () => {
 
   return (
     <div className="bg-primaryColor h-svh">
+      
       <Toaster
         position="top-center"
         toastOptions={{

@@ -63,7 +63,7 @@ function SignUp() {
           phone_no,
           type,
         };
-        setTimeout(() => navigate('/otp', { state: data }), 2000);
+        navigate('/otp', { state: data })
       }
     } catch (error) {
       console.error('Error:', error);

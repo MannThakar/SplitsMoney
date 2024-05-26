@@ -65,12 +65,12 @@ function Otp() {
             'X-Requested-With': 'XMLHttpRequest'
           }
         });
-        if (response.status === 200) {
+        if (response.status == 200) {
           let data = {
             token_data: response.data.token,
           };
           storeToken(data.token_data);
-          setTimeout(() => navigate('/', { state: data }), 7000);
+          navigate('/', { state: data });
         } else {
           toast.error("Invalid OTP");
         }

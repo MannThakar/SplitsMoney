@@ -1,16 +1,17 @@
+/* eslint-disable no-unused-vars */
 
 // import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VerifyLoaderComponent from '../utils/VerifyLoaderComponent'
+import SplashScreen from "../utils/SplashScreen";
 import axios from 'axios';
 const GroupInvite = () => {
-    
+
     const navigate = useNavigate();
 
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get('token');
-    
+
 
     useEffect(() => {
         checkInvitation();
@@ -35,7 +36,7 @@ const GroupInvite = () => {
                 alert("Invalid Token")
             } else if (response.status === 200) {
                 console.log(response)
-                    
+
                 /* console.log('Invitation sent successfully'); */
             } else {
                 console.log('Error while sending invitation');
@@ -49,7 +50,7 @@ const GroupInvite = () => {
 
     return (
         <>
-            < VerifyLoaderComponent />
+            <SplashScreen />
         </>
     )
 }
