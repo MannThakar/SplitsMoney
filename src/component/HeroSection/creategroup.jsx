@@ -76,7 +76,7 @@ const CreateGroup = () => {
                     {({ isSubmitting }) => (
                         <Form className="w-full">
                             <div className='py-4 flex flex-col gap-4'>
-                                    {/* Heli's code */}
+                                    {/* Heli's Code */}
                                 <div className='flex items-center gap-3'>
                                     <Users className='text-white' />
                                     <Field type='text' name="name" className="w-full p-2 border-b-2 bg-transparent font-satoshi text-white" placeholder="Group name" maxLength={255} />
