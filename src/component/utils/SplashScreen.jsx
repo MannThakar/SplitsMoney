@@ -1,5 +1,5 @@
 //Heli's code
-import React from "react";
+
 import SplitLogo from "../../icons/SplitLogo";
 
 const SplashScreen = () => {
