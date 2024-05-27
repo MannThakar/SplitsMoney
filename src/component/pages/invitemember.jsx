@@ -36,6 +36,7 @@ const GroupInvite = () => {
                 alert("Invalid Token")
             } else if (response.status === 200) {
                 console.log(response)
+                navigate('/');
 
                 /* console.log('Invitation sent successfully'); */
             } else {
