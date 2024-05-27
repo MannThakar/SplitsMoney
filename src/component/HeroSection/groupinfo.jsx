@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import Modal from "../../component/modal/modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowLeft, Settings, UsersRound, UserRound, CircleUserRound, ReceiptText } from 'lucide-react';
+
 
 const GroupInfo = () => {
   const navigate = useNavigate();
@@ -13,6 +15,9 @@ const GroupInfo = () => {
   const [expenses, setExpenses] = useState([]);
   const isActive = (path) => location.pathname === path ? 'text-highlightColor' : 'text-white';
   const groupColor = location.state?.color || '#7c3aed'; // Default color if none is passed
+
+
+
 
   const getGroupApi = async () => {
     try {
@@ -40,13 +45,31 @@ const GroupInfo = () => {
     }
   };
 
+
+  const viewMember = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API}/groups/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+        },
+      });
+      console.log("Members",res)
+    } catch (error) {
+      console.error("Group Members", error);
+    }
+  };
+
+  
+
   useEffect(() => {
     getGroupApi();
     expenseList();
+    viewMember();
   }, [id]);
 
   return (
     <div className='h-screen bg-primaryColor flex flex-col'>
+
       <div className="flex w-full justify-between px-3 pt-3">
         <button className='flex items-center flex-row-reverse gap-2' onClick={() => navigate(-1)}>
           <h2 className='text-white text-base '>back</h2>

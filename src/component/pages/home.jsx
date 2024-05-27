@@ -42,7 +42,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [res, setRes] = useState([]);
   const colors = ["#7c3aed", "#0891b2", "#16a34a", "#ea580c"];
-
+  const emojis = ["😀", "🎉", "🚀", "🌟"];
+  
   const isActive = (path) => location.pathname === path ? 'text-highlightColor' : 'text-white';
 
   // View Group
