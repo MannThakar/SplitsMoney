@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-
-// import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SplashScreen from "../utils/SplashScreen";
@@ -35,17 +33,10 @@ const GroupInvite = () => {
             if (response.status === 400) {
                 alert("Invalid Token")
             } else if (response.status === 200) {
-                console.log(response)
                 navigate('/');
-
-                /* console.log('Invitation sent successfully'); */
-            } else {
-                console.log('Error while sending invitation');
-            }
-
-
+            } 
         } catch (error) {
-            /* console.error('Error:', error); */
+            console.error('Error:', error);
         }
     }
 
