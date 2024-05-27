@@ -9,8 +9,6 @@ const AddExpense = () => {
     const navigate = useNavigate();
     const { id } = useParams();  // Retrieve group_id from URL parameters
     const group_id = id;
-    const payer_user_id = 2; // Assuming payer_user_id is stored in localStorage
-
     const validationSchema = Yup.object().shape({
         description: Yup.string().required('Description is required'),
         amount: Yup.number().required('Amount is required').positive('Amount must be positive').integer('Amount must be an integer'),
