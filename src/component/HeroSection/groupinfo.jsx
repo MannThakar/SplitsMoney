@@ -46,13 +46,13 @@ const GroupInfo = () => {
   };
 
 
- 
-  
+
+
 
   useEffect(() => {
     getGroupApi();
     expenseList();
-    
+
   }, [id]);
 
   return (
@@ -70,7 +70,7 @@ const GroupInfo = () => {
 
       <div className="relative pl-5 pt-3 flex items-center">
         <div
-          className="w-14 h-14 rounded-2xl mr-4"
+          className="h-4 w-4 rounded-full mr-4"
           style={{ backgroundColor: groupColor }}
         ></div>
         <div>
