@@ -30,13 +30,13 @@ const GroupInvite = () => {
             );
 
 
-            if (response.status === 400) {
-                alert("Invalid Token")
-            } else if (response.status === 200) {
+            if (response.status == 200) {
                 navigate('/');
-            } 
+            }
         } catch (error) {
             console.error('Error:', error);
+            alert(error.response.data.message);
+            navigate('/signup');
         }
     }
 

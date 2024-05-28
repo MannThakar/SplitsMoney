@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
@@ -10,40 +11,17 @@ import Navigations from "./navigation";
 import { UsersRound, } from 'lucide-react';
 import { UserRound } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react';
+import { FaPlane, FaRunning, FaHeart, FaMusic } from 'react-icons/fa';
 
 
 
-//   useEffect(() => {
-//     // const token = localStorage.getItem('member-token');
-//     // console.log(token)
-//     // if (token) {
-//     //   viewGroup();
-//     // } else {
-//     //   navigate('/signup')
-//     // }
-//     viewGroup()
-//   }, []);
-
-//   // async function detailGroup() {
-//   //   const members = null;
-//   //   try {
-//   //     const response = await axios.get(`${import.meta.env.VITE_API}/groups/?includes=members`, {
-
-//   //     })
-//   //     console.log(response)
-//   //   } catch (error) {
-//   //     console.log(error)
-//   //   }
-//   // }
-//   // useEffect(() => {
-//   //   detailGroup()
-//   // }, [])
 const Home = () => {
   const navigate = useNavigate();
   const [res, setRes] = useState([]);
   const colors = ["#7c3aed", "#0891b2", "#16a34a", "#ea580c"];
-  const emojis = ["😀", "🎉", "🚀", "🌟"];
-  
+  const icons = [<FaPlane />, <FaRunning />, <FaHeart />, <FaMusic />];
+
+
   const isActive = (path) => location.pathname === path ? 'text-highlightColor' : 'text-white';
 
   // View Group
@@ -71,7 +49,7 @@ const Home = () => {
 
   return (
     <div className="bg-primaryColor h-svh">
-      
+
       <Toaster
         position="top-center"
         toastOptions={{
@@ -91,25 +69,30 @@ const Home = () => {
         </div>
       </div>
       <div className='mt-2'></div>
-      {res.length ? (
-        res.map((e, index) => (
-          <div key={index} className="w-11/12 mx-auto mt-3">
-            <Link to={`/group/${e.id}`} state={{ color: e.color }}>
-              <div className="flex gap-5 items-center">
-                <div
-                  className="flex w-14 h-14 rounded-xl"
-                  style={{ backgroundColor: e.color }}
-                ></div>
-                <h2 className="text-lg font-semibold text-white">{e.name}</h2>
-              </div>
-            </Link>
+
+      <div>
+        {res.length ? (
+          res.map((e, index) => (
+            <div key={index} className="w-11/12 mx-auto mt-3">
+              <Link to={`/group/${e.id}`} state={{ color: e.color }}>
+                <div className="flex gap-5 items-center">
+                  <div
+                    className="flex w-14 h-14 rounded-xl items-center justify-center"
+                    style={{ backgroundColor: e.color }}
+                  >
+                    <span className="text-2xl text-white">{icons[index % icons.length]}</span>
+                  </div>
+                  <h2 className="text-lg font-semibold text-white">{e.name}</h2>
+                </div>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div className="flex justify-center my-4">
+            <h3 className="font-satoshi text-lg text-white">No group available</h3>
           </div>
-        ))
-      ) : (
-        <div className="flex justify-center my-4">
-          <h3 className="font-satoshi text-lg text-white">No group available</h3>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="flex justify-around w-full fixed bottom-0 bg-primaryColor p-2">
         <button className="flex flex-col justify-center items-center" onClick={() => navigate("/")}>
