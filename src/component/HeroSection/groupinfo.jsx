@@ -46,25 +46,13 @@ const GroupInfo = () => {
   };
 
 
-  const viewMember = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API}/groups/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-        },
-      });
-      console.log("Members",res)
-    } catch (error) {
-      console.error("Group Members", error);
-    }
-  };
-
+ 
   
 
   useEffect(() => {
     getGroupApi();
     expenseList();
-    viewMember();
+    
   }, [id]);
 
   return (
